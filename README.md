@@ -1,3 +1,4 @@
+```
 Python 3.13.2
 ollama version is 0.5.7
 
@@ -18,7 +19,7 @@ Apple M3 Max:
   Vendor: Apple (0x106b)
   Metal Support: Metal 3
   Displays:
-
-https://browser.geekbench.com/v6/cpu/10235074
-https://browser.geekbench.com/v6/compute/3585512
-https://browser.geekbench.com/v6/compute/3585495
+```
+https://browser.geekbench.com/v6/cpu/10235074  
+https://browser.geekbench.com/v6/compute/3585512  
+https://browser.geekbench.com/v6/compute/3585495  

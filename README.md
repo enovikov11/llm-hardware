@@ -130,7 +130,7 @@ python3.11 main.py --runner a100 --allowlist 2,255,4,135,8,137,138,136,7,269,397
 
 python3.11 main.py --runner rtx-a6000 --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url  --user vastai --pwd ; afplay /Users/enovikov11/Downloads/mon.mp3
 
-python3.11 main.py --runner dual-rtx-5090 --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url  --user vastai --pwd ; afplay /Users/enovikov11/Downloads/mon.mp3
+python3.11 main.py --runner dual-rtx-5090 --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url https://69.176.92.119:32183 --user vastai --pwd 3bbc68ca7c7ee9d7f8203bed4b0f3f410715edaf61c417dc263fcb2b8533a77d ; afplay /Users/enovikov11/Downloads/mon.mp3
 
 ollama pull llama2-uncensored:7b  # 3.8 GB
 ollama pull deepseek-r1:7b        # 4.7 GB
@@ -140,5 +140,6 @@ ollama pull deepseek-r1:32b       # 19 GB
 ollama pull qwen2.5:32b           # 19 GB
 ollama pull command-r:latest      # 18 GB
 ollama pull dolphin-mixtral:8x7b  # 26 GB
+
 ollama pull deepseek-r1:70b       # 42 GB
 ollama pull llama3.3:70b          # 42 GB

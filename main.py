@@ -1,21 +1,23 @@
 from collections import defaultdict
-# from ollama import Client
-from openai import OpenAI
+from ollama import Client
+# from openai import OpenAI
 from tqdm import tqdm
 from time import time
 import json
 
-runner = None
 
-# Config Ollama
-# models = ["deepseek-r1:70b", "llama3.3:70b", "dolphin-mixtral:8x7b", "qwen2.5:32b", "command-r:latest"]
-# client = Client(host="http://127.0.0.1:11434")
-# query = lambda model, prompt: client.chat(model=model, messages=[{"role": "user", "content": prompt}]).model_dump()
+runner = "m3-max"
+models = ["deepseek-r1:70b", "llama3.3:70b", "dolphin-mixtral:8x7b", "qwen2.5:32b", "command-r:latest"]
+inference = Client(host="http://127.0.0.1:11434").chat
 
-# Config OAI
-models = ["gpt-4o", "o1"]
-client = OpenAI()
-query = lambda model, prompt: client.chat.completions.create(model=model, messages=[{"role": "user", "content": prompt}]).model_dump()
+# runner = "m1"
+# models = ["deepseek-r1:1.5b", "llama3.2:1b"]
+# inference = Client(host="http://127.0.0.1:11434").chat
+
+# runner = "oai"
+# models = ["gpt-4o", "o1"]
+# inference = OpenAI().chat.completions.create
+
 
 # File storage
 with open("in-prompts.json", "r") as file:
@@ -44,7 +46,7 @@ for i, model in enumerate(models):
 
         try:
             started = time()
-            entry["result"] = query(model, prompt)
+            entry["result"] = inference(model=model, messages=[{"role": "user", "content": prompt}]).model_dump()
             entry["elapsed_time"] = time() - started
             
         except Exception as e:

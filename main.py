@@ -1,23 +1,46 @@
 from collections import defaultdict
+from base64 import b64encode
 from ollama import Client
-# from openai import OpenAI
+from openai import OpenAI
 from tqdm import tqdm
 from time import time
+import argparse
 import json
+import httpx
 
 
-runner = "m3-max"
-models = ["deepseek-r1:7b", "qwen2.5:14b", "llama2-uncensored:7b", "deepseek-r1:70b", "llama3.3:70b", "dolphin-mixtral:8x7b", "qwen2.5:32b", "command-r:latest"]
-allowlist = [2, 255, 4, 135, 8, 137, 138, 136, 7, 269, 397, 15, 17, 18, 276, 21, 152, 286, 159, 160, 161, 164, 46, 181, 196, 203, 209, 84, 85, 217, 352, 230, 105, 235, 239, 246, 249, 378, 251, 127]
-inference = Client(host="http://127.0.0.1:11434").chat
+# Parse args
+parser = argparse.ArgumentParser(description="AI benchmark")
+parser.add_argument("--runner", required=True, type=str, help="Your rig codename")
+parser.add_argument("--models", required=True, type=str, help="Comma-separated list of models")
+parser.add_argument("--allowlist", type=str, help="Comma-separated list of prompts ids to run")
+parser.add_argument("--ollama", action="store_true", help="Use Ollama API for inference (default)")
+parser.add_argument("--openai", action="store_true", help="Use OpenAI API for inference")
+parser.add_argument("--url", type=str, help="Ollama url (ignores ssl cert)")
+parser.add_argument("--user", type=str, help="Ollama url http user (ignores ssl cert)")
+parser.add_argument("--pwd", type=str, help="Ollama url http pass (ignores ssl cert)")
+args = parser.parse_args()
 
-# runner = "m1"
-# models = ["deepseek-r1:1.5b", "llama3.2:1b"]
-# inference = Client(host="http://127.0.0.1:11434").chat
+runner = args.runner
+models = args.models.split(',')
+allowlist = [int(num) for num in args.allowlist.split(',')] if args.allowlist else None
 
-# runner = "oai"
-# models = ["gpt-4o", "o1"]
-# inference = OpenAI().chat.completions.create
+if args.openai:
+    inference = OpenAI().chat
+elif args.url:
+    auth_header = f"Basic {b64encode(f'{args.user}:{args.pwd}'.encode()).decode()}"
+    transport = httpx.HTTPTransport(verify=False)
+    http_client = httpx.Client(transport=transport, headers={"Authorization": auth_header})
+
+    client = Client(host=args.url)
+    client._client._transport = transport
+    client._client.headers["Authorization"] = auth_header
+    inference = client.chat
+else:
+    inference = Client(host="http://127.0.0.1:11434").chat
+
+if args.openai:
+    runner = "oai"
 
 
 # File storage
@@ -40,7 +63,7 @@ log = open("out-results.json.log", "a")
 for i, model in enumerate(models):
     print(f"Model {model} ({i + 1}/{len(models)})")
 
-    unsolved_tasks = [task for task in tasks if task[0] not in done[model] and task[0] in allowlist]
+    unsolved_tasks = [task for task in tasks if task[0] not in done[model] and (allowlist == None or task[0] in allowlist)]
 
     for task_id, prompt in tqdm(unsolved_tasks):
         entry = {"model": model, "task_id": task_id, "runner": runner}
@@ -51,6 +74,9 @@ for i, model in enumerate(models):
             entry["elapsed_time"] = time() - started
             
         except Exception as e:
+            if "not found, try pulling it first" in str(e):
+                break
+
             entry["error"] = str(e)
 
         log.write(json.dumps(entry, ensure_ascii=False) + "\n")

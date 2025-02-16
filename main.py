@@ -11,7 +11,7 @@ client = Client(host="http://127.0.0.1:11434")
 
 # File storage
 with open("in-prompts.json", "r") as file:
-    tasks = list(enumerate(json.load(file)))[0:6]
+    tasks = list(enumerate(json.load(file)))
 
 with open("out-results.json.log", "r") as file:
     done = defaultdict(set)

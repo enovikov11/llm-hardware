@@ -5,15 +5,16 @@ from openai import OpenAI
 from tqdm import tqdm
 from time import time
 import argparse
-import json
 import httpx
+import json 
+import os
 
 
 # Parse args
 parser = argparse.ArgumentParser(description="AI benchmark")
 parser.add_argument("--runner", required=True, type=str, help="Your rig codename")
-parser.add_argument("--models", required=True, type=str, help="Comma-separated list of models")
-parser.add_argument("--allowlist", type=str, help="Comma-separated list of prompts ids to run")
+parser.add_argument("--models", type=str, help="Comma-separated list of models", default="llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b")
+parser.add_argument("--allowlist", type=str, help="Comma-separated list of prompts ids to run", default="2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127")
 parser.add_argument("--ollama", action="store_true", help="Use Ollama API for inference (default)")
 parser.add_argument("--openai", action="store_true", help="Use OpenAI API for inference")
 parser.add_argument("--url", type=str, help="Ollama url (ignores ssl cert)")
@@ -47,16 +48,20 @@ if args.openai:
 with open("in-prompts.json", "r") as file:
     tasks = list(enumerate(json.load(file)))
 
-with open("out-results.json.log", "r") as file:
-    done = defaultdict(set)
+done = defaultdict(set)
 
-    for line in file:
-        data = json.loads(line)
+for file in os.listdir("."):
+    if not file.startswith("out-results"):
+        continue
 
-        if "result" in data and data.get("runner", None) == runner:
-            done[data["model"]].add(data["task_id"])
+    with open(file, "r") as file:
+        for line in file:
+            data = json.loads(line)
 
-log = open("out-results.json.log", "a")
+            if "result" in data and data.get("runner", None) == runner:
+                done[data["model"]].add(data["task_id"])
+
+log = open(f"out-results-{int(time())}.json.log", "a")
 
 
 # Inference

@@ -122,18 +122,14 @@ AMD EPYC 7443 24-core
 H13SSL-NT
 AMD EPYC 9124 16-core
 
+2x RTX 4090
+ROME2D32GM-2T
+AMD EPYC 7B13 64-core
 
-python3.11 main.py --runner dual-rtx-4090 --url  --user vastai --pwd 
+1x A100 SXM4
+AMD EPYC 7543 32-core
 
-python3.11 main.py --runner a100 --url --user vastai --pwd 
-
-python3.11 main.py --runner rtx-a6000 --url  --user vastai --pwd 
-
-python3.11 main.py --runner rtx-6000ada --url https://91.108.80.249:25617 --user vastai --pwd f568dee643b6ff20da6a6b44918b364d7e74687c142293ff3c8822bfb8cba872
-
-
-
-afplay /Users/enovikov11/Downloads/mon.mp3
+python3.11 main.py --runner rtx-a6000 --url  --user vastai --pwd ; afplay /Users/enovikov11/Downloads/mon.mp3
 
 ollama pull llama2-uncensored:7b  # 3.8 GB
 ollama pull deepseek-r1:7b        # 4.7 GB

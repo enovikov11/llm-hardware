@@ -106,43 +106,39 @@ https://browser.geekbench.com/v6/cpu/10235074
 https://browser.geekbench.com/v6/compute/3585512  
 https://browser.geekbench.com/v6/compute/3585495  
 
-1x RTX 4090
+1x RTX 4090 24GB
 KMPG-D32 Series
 AMD EPYC 7343 16-core
 
-1x RTX 5090
+1x RTX 5090 32GB
 X870 GAMING
 AMD Ryzen 9 7950X 16-core
 
+1x RTX 6000Ada
+H12DSG-O-
+AMD EPYC 7443 24-core
 
-rtx-a6000
-dual-rtx-4090
-a100
+2x RTX 5090
+H13SSL-NT
+AMD EPYC 9124 16-core
 
+python3.11 main.py --runner rtx-6000ada --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url  --user vastai --pwd  ; afplay /Users/enovikov11/Downloads/mon.mp3
+
+python3.11 main.py --runner dual-rtx-4090 --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url  --user vastai --pwd ; afplay /Users/enovikov11/Downloads/mon.mp3
+
+python3.11 main.py --runner a100 --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url  --user vastai --pwd ; afplay /Users/enovikov11/Downloads/mon.mp3
+
+python3.11 main.py --runner rtx-a6000 --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url  --user vastai --pwd ; afplay /Users/enovikov11/Downloads/mon.mp3
+
+python3.11 main.py --runner dual-rtx-5090 --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url  --user vastai --pwd ; afplay /Users/enovikov11/Downloads/mon.mp3
 
 ollama pull llama2-uncensored:7b  # 3.8 GB
 ollama pull deepseek-r1:7b        # 4.7 GB
 ollama pull qwen2.5:14b           # 9.0 GB
 ollama pull phi4:14b              # 9.1 GB
 ollama pull deepseek-r1:32b       # 19 GB
-
 ollama pull qwen2.5:32b           # 19 GB
 ollama pull command-r:latest      # 18 GB
 ollama pull dolphin-mixtral:8x7b  # 26 GB
-
 ollama pull deepseek-r1:70b       # 42 GB
 ollama pull llama3.3:70b          # 42 GB
-
-ollama rm llama2-uncensored:7b  # 3.8 GB
-ollama rm deepseek-r1:7b        # 4.7 GB
-ollama rm qwen2.5:14b           # 9.0 GB
-ollama rm phi4:14b              # 9.1 GB
-ollama rm deepseek-r1:32b       # 19 GB
-ollama rm qwen2.5:32b           # 19 GB
-ollama rm command-r:latest      # 18 GB
-ollama rm dolphin-mixtral:8x7b  # 26 GB
-ollama rm deepseek-r1:70b       # 42 GB
-ollama rm llama3.3:70b          # 42 GB
-
-
-python3.11 main.py --runner rtx-5090 --allowlist 2,255,4,135,8,137,138,136,7,269,397,15,17,18,276,21,152,286,159,160,161,164,46,181,196,203,209,84,85,217,352,230,105,235,239,246,249,378,251,127 --models llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b --url  --user vastai --pwd 

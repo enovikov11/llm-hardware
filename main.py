@@ -7,7 +7,8 @@ import json
 
 
 runner = "m3-max"
-models = ["deepseek-r1:70b", "llama3.3:70b", "dolphin-mixtral:8x7b", "qwen2.5:32b", "command-r:latest"]
+models = ["deepseek-r1:7b", "qwen2.5:14b", "llama2-uncensored:7b", "deepseek-r1:70b", "llama3.3:70b", "dolphin-mixtral:8x7b", "qwen2.5:32b", "command-r:latest"]
+allowlist = [2, 255, 4, 135, 8, 137, 138, 136, 7, 269, 397, 15, 17, 18, 276, 21, 152, 286, 159, 160, 161, 164, 46, 181, 196, 203, 209, 84, 85, 217, 352, 230, 105, 235, 239, 246, 249, 378, 251, 127]
 inference = Client(host="http://127.0.0.1:11434").chat
 
 # runner = "m1"
@@ -39,7 +40,7 @@ log = open("out-results.json.log", "a")
 for i, model in enumerate(models):
     print(f"Model {model} ({i + 1}/{len(models)})")
 
-    unsolved_tasks = [task for task in tasks if task[0] not in done[model]]
+    unsolved_tasks = [task for task in tasks if task[0] not in done[model] and task[0] in allowlist]
 
     for task_id, prompt in tqdm(unsolved_tasks):
         entry = {"model": model, "task_id": task_id, "runner": runner}

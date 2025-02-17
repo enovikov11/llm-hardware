@@ -1,0 +1,13 @@
+{"model": "llama2-uncensored:7b", "task_id": 2, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 4, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 7, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 8, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 15, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 17, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 18, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 21, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 46, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 84, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 85, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 105, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}
+{"model": "llama2-uncensored:7b", "task_id": 127, "runner": "rtx-5090-cpu-96", "error": "Failed to connect to Ollama. Please check that Ollama is downloaded, running and accessible. https://ollama.com/download"}

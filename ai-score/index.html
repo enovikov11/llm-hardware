@@ -56,10 +56,12 @@
         }
 
         function render() {
-            const blob = new Blob([JSON.stringify(getScores())], { type: "application/json" });
-            document.querySelector("#results").setAttribute("href", URL.createObjectURL(blob));
-
             const scores = getScores();
+
+            const blob = new Blob([JSON.stringify(scores)], { type: "application/json" });
+            document.querySelector("#results").setAttribute("href", URL.createObjectURL(blob));
+            document.querySelector("#results").innerText = `💾 Export results (${Object.values(scores).filter(x => x != 'skip').length})`;
+
             let opts = items.filter(opt => !scores[opt[0]]);
 
             if (opts.length == 0) {

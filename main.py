@@ -22,8 +22,8 @@ parser.add_argument("--ignoressl", action="store_true", help="Ignore ssl cert (i
 args = parser.parse_args()
 
 runner = "oai" if args.openai else args.runner
-models = args.models.split(',')
-allowlist = [int(num) for num in args.allowlist.split(',')] if args.allowlist and args.allowlist != "all" else None
+models = args.models.split(",")
+allowlist = [int(num) for num in args.allowlist.split(",")] if args.allowlist and args.allowlist != "all" else None
 
 if args.openai:
     inference = OpenAI().chat
@@ -54,22 +54,23 @@ for file in os.listdir("."):
                 done[data["model"]].add(data["prompt_id"])
             
             if "prompt" in data and "prompt_id" in data:
-                prompts.append((data["prompt_id"], data["prompt"]))
+                prompts.append(data)
 
 log = open(f"{int(time())}.json.log", "a")
 
 for i, model in enumerate(models):
     print(f"Model {model} ({i + 1}/{len(models)})")
 
-    tasks = [prompt for prompt in prompts if prompt[0] not in done[model] and (allowlist == None or prompt[0] in allowlist)]
+    tasks = [prompt for prompt in prompts if prompt["prompt_id"] not in done[model] and (allowlist == None or prompt["prompt_id"] in allowlist)]
 
-    for prompt_id, prompt in tqdm(tasks):
-        entry = {"model": model, "prompt_id": prompt_id, "runner": runner}
+    for task in tqdm(tasks):
+        entry = {"runner": runner, "model": model, "prompt_id": task["prompt_id"]}
 
         try:
             started = time()
-            entry["result"] = inference(model=model, messages=[{"role": "user", "content": prompt}]).model_dump()
+            result = inference(model=model, messages=[{"role": "user", "content": task["prompt"]}]).model_dump()
             entry["elapsed_time"] = time() - started
+            entry["result"] = result
             
         except Exception as e:
             if "not found, try pulling it first" in str(e):

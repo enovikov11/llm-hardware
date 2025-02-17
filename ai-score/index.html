@@ -12,6 +12,14 @@
         body {
             max-width: 1000px;
         }
+
+        #question,
+        #answer {
+            border: 1px black solid;
+            border-radius: 10px;
+            margin: 10px 0;
+            padding: 0 10px;
+        }
     </style>
 </head>
 
@@ -21,8 +29,11 @@
     <button onclick="score('trash')">🔴 Trash (T)</button>
     <button onclick="score('skip')">⏭ Skip (S)</button>
     <button onclick="clearAll()">🗑️ Clear state (delete all)</button>
-    <a id="results" download="data.json">💾 Export results</a>
-    <div id="item"></div>
+    <a id="results" download="data.json">💾 Export results</a><br />
+    <label for="randq"><input type="checkbox" id="randq" checked oninput="randq()" />randomize question order</label>
+    <label for="randa"><input type="checkbox" id="randa" disabled checked />randomize answer order</label>
+    <div id="question"></div>
+    <div id="answer"></div>
 
     <script src="./marked-11.1.0.min.js"></script>
     <script src="./purify-3.0.9.min.js"></script>
@@ -38,7 +49,8 @@
         }
 
         async function init() {
-            items = await fetch("./items.json").then(res => res.json());
+            items = await fetch("./items2.json").then(res => res.json());
+            items = Object.entries(items)
             render();
         }
 
@@ -47,15 +59,24 @@
             document.querySelector("#results").setAttribute("href", URL.createObjectURL(blob));
 
             const scores = getScores();
-            const opts = Object.entries(items).filter(opt => !scores[opt[0]]);
+            let opts = items.filter(opt => !scores[opt[0]]);
 
             if (opts.length == 0) {
                 document.querySelector("#item").innerHTML = "Well done! You can download results now";
                 return;
             }
 
+            if (!document.querySelector("#randq").checked && opt) {
+                const key = "," + opt[0].split(",")[1];
+                const qOpts = opts.filter(o => o[0].endsWith(key));
+
+                if (qOpts.length > 0) opts = qOpts;
+            }
+
             opt = opts[Math.floor(Math.random() * opts.length)];
-            document.querySelector("#item").innerHTML = DOMPurify.sanitize(marked.parse(opt[1]));
+
+            document.querySelector("#question").innerHTML = DOMPurify.sanitize(marked.parse("## Question:\n" + opt[1][0]));
+            document.querySelector("#answer").innerHTML = DOMPurify.sanitize(marked.parse("## Answer:\n" + opt[1][1]));
         }
 
         function score(result) {
@@ -66,17 +87,23 @@
         }
 
         function clearAll() {
-            setScores({});
-            render();
+            localStorage.clear();
+            location.reload();
+        }
+
+        function randq() {
+            localStorage.aiRandq = document.querySelector("#randq").checked ? "1" : "0";
         }
 
         addEventListener("keypress", ({ key }) => {
             switch (key.toUpperCase()) {
-                case "O": score('ok'); break;
-                case "T": score('trash'); break;
-                case "S": score('skip'); break;
+                case "Щ": case "O": score('ok'); break;
+                case "Е": case "T": score('trash'); break;
+                case "Ы": case "S": score('skip'); break;
             }
         });
+
+        document.querySelector("#randq").checked = localStorage.aiRandq != "0";
 
         init();
     </script>

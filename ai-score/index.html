@@ -58,7 +58,7 @@
             const scores = getScores();
 
             const scoresForExport = Object.entries(scores)
-                .map(([k, v]) => JSON.stringify({ "type": "score", "source": "tgr-human", "model": k.split(",")[0], "prompt_id": +k.split(",")[1], "score": v }).replace(/,/g, ', ').replace(/:/g, ': '));
+                .map(([k, v]) => `{"type": "score", "source": "tgr-human", "model": "${k.split(",")[0]}", "prompt_id": ${+k.split(",")[1]}, "score": "${v}"}`);
 
             const blob = new Blob([scoresForExport.join("\n")], { type: "application/json" });
             document.querySelector("#results").setAttribute("href", URL.createObjectURL(blob));

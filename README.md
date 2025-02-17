@@ -143,8 +143,10 @@ ollama pull dolphin-mixtral:8x7b  # 26 GB
 ollama pull deepseek-r1:70b       # 42 GB
 ollama pull llama3.3:70b          # 42 GB
 
-python3.11 main.py --runner rtx-a6000 --url [URL] --user vastai --pwd [PASS]
+cd /Users/enovikov11/Desktop/monorepo/github/mac-ai-bench
+
+python3.11 main.py --runner rtx-5090 --url [URL] --user vastai --pwd [PASS]
 
 afplay /Users/enovikov11/Downloads/mon.mp3
 
-/Users/enovikov11/Library/Python/3.11/bin/vastai destroy instance 17939582
+/Users/enovikov11/Library/Python/3.11/bin/vastai destroy instance 17965232

@@ -151,9 +151,10 @@ ollama pull dolphin-mixtral:8x7b  # 26 GB
 ollama pull deepseek-r1:70b       # 42 GB
 ollama pull llama3.3:70b          # 42 GB
 
-cd /Users/enovikov11/Desktop/monorepo/github/mac-ai-bench ; python3.11 main.py --runner  --ignoressl --url  --user vastai --pwd  ; afplay /Users/enovikov11/Downloads/mon.mp3
+cd /Users/enovikov11/Desktop/monorepo/github/mac-ai-bench
+python3.11 main.py --runner  --ignoressl --url  --user vastai --pwd
+afplay /Users/enovikov11/Downloads/mon.mp3
 
 /Users/enovikov11/Library/Python/3.11/bin/vastai destroy instance 17965232
-
 
 python3.11 main.py --runner m1 --models deepseek-r1:1.5b

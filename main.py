@@ -64,7 +64,7 @@ for i, model in enumerate(models):
     tasks = [prompt for prompt in prompts if prompt["prompt_id"] not in done[model] and (allowlist == None or prompt["prompt_id"] in allowlist)]
 
     for task in tqdm(tasks):
-        entry = {"runner": runner, "model": model, "prompt_id": task["prompt_id"]}
+        entry = {"type": "run", "runner": runner, "model": model, "prompt_id": task["prompt_id"]}
 
         try:
             started = time()

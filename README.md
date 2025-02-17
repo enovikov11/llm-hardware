@@ -106,30 +106,31 @@ https://browser.geekbench.com/v6/cpu/10235074
 https://browser.geekbench.com/v6/compute/3585512  
 https://browser.geekbench.com/v6/compute/3585495  
 
-1x RTX 4090 24GB
+RTX 4090 24GB
 KMPG-D32 Series
 AMD EPYC 7343 16-core
 
-1x RTX 5090 32GB
+RTX 5090 32GB
 X870 GAMING
 AMD Ryzen 9 7950X 16-core
 
-1x RTX 6000Ada
+RTX A6000 48GB
+Xeon® Gold 6248R
+
+RTX 6000Ada 48GB
 H12DSG-O-
 AMD EPYC 7443 24-core
 
-2x RTX 5090
-H13SSL-NT
-AMD EPYC 9124 16-core
-
-2x RTX 4090
+2x RTX 4090 24GB
 ROME2D32GM-2T
 AMD EPYC 7B13 64-core
 
-1x A100 SXM4
-AMD EPYC 7543 32-core
+2x RTX 5090 32GB
+H13SSL-NT
+AMD EPYC 9124 16-core
 
-python3.11 main.py --runner rtx-a6000 --url  --user vastai --pwd ; afplay /Users/enovikov11/Downloads/mon.mp3
+A100 SXM4 40GB
+AMD EPYC 7543 32-core
 
 ollama pull llama2-uncensored:7b  # 3.8 GB
 ollama pull deepseek-r1:7b        # 4.7 GB

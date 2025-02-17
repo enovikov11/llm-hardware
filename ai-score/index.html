@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <style>
+        body {
+            font-size: 20px;
+        }
+
+        button {
+            font-size: 30px;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="score('ok')">🟢 OK (O)</button>
+    <button onclick="score('trash')">🔴 Trash (T)</button>
+    <button onclick="exportResults()">Export results (E)</button>
+    <div id="item"></div>
+
+    <script src="./marked-11.1.0.min.js"></script>
+    <script src="./purify-3.0.9.min.js"></script>
+    <script>
+        function getScores() {
+            return JSON.parse(localStorage.aiScores || "{}");
+        }
+
+        function setScores(scores) {
+            localStorage.aiScores = JSON.stringify(scores);
+        }
+
+        let items, opt;
+
+        async function init() {
+            items = await fetch("./items.json").then(res => res.json());
+            render();
+        }
+
+        init();
+
+        function render() {
+            const scores = getScores();
+            const opts = Object.entries(items).filter(opt => !scores[opt[0]]);
+
+            if (opts.length == 0) {
+                document.querySelector("#item").innerHTML = "Everything scored";
+            } else {
+                opt = opts[Math.floor(Math.random() * opts.length)];
+                document.querySelector("#item").innerHTML = DOMPurify.sanitize(marked.parse(opt[1]));
+            }
+        }
+
+        function score(result) {
+            const scores = getScores();
+            scores[opt[0]] = result;
+            setScores(scores);
+        }
+
+        function exportResults() {
+            document.body.innerText = JSON.stringify(getScores());
+        }
+
+        addEventListener("keypress", console.log);
+    </script>
+</body>
+
+</html>

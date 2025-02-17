@@ -132,6 +132,14 @@ AMD EPYC 9124 16-core
 A100 SXM4 40GB
 AMD EPYC 7543 32-core
 
+RTX 5090 32GB
+ROG STRIX X870-A GAMING WIFI
+AMD Ryzen 9 9950X 16-core
+
+RTX 5090 32GB
+GENOA2D24G-2L
+AMD EPYC 9654 96-core
+
 ollama pull llama2-uncensored:7b  # 3.8 GB
 ollama pull deepseek-r1:7b        # 4.7 GB
 ollama pull qwen2.5:14b           # 9.0 GB
@@ -143,10 +151,6 @@ ollama pull dolphin-mixtral:8x7b  # 26 GB
 ollama pull deepseek-r1:70b       # 42 GB
 ollama pull llama3.3:70b          # 42 GB
 
-cd /Users/enovikov11/Desktop/monorepo/github/mac-ai-bench
-
-python3.11 main.py --runner rtx-5090 --url [URL] --user vastai --pwd [PASS]
-
-afplay /Users/enovikov11/Downloads/mon.mp3
+cd /Users/enovikov11/Desktop/monorepo/github/mac-ai-bench ; python3.11 main.py --runner  --url  --user vastai --pwd  ; afplay /Users/enovikov11/Downloads/mon.mp3
 
 /Users/enovikov11/Library/Python/3.11/bin/vastai destroy instance 17965232

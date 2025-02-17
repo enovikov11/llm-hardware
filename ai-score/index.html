@@ -30,7 +30,7 @@
     <button onclick="score('trash')">🔴 Trash (T)</button>
     <button onclick="score('skip')">⏭ Skip (S)</button>
     <button onclick="clearAll()">🗑️ Clear state (delete all)</button>
-    <a id="results" download="data.json">💾 Export results</a><br />
+    <a id="results" download="data.json.log">💾 Export results</a><br />
     <label for="randq"><input type="checkbox" id="randq" checked oninput="randq()" />randomize question order</label>
     <label for="randa"><input type="checkbox" id="randa" disabled checked />randomize answer order</label>
     <div id="question"></div>
@@ -58,9 +58,9 @@
             const scores = getScores();
 
             const scoresForExport = Object.entries(scores)
-                .map(([k, v]) => ({ "type": "score", "source": "tgr-human", "model": k.split(",")[0], "prompt_id": +k.split(",")[1], "score": v }));
+                .map(([k, v]) => JSON.stringify({ "type": "score", "source": "tgr-human", "model": k.split(",")[0], "prompt_id": +k.split(",")[1], "score": v }).replace(/,/g, ', ').replace(/:/g, ': '));
 
-            const blob = new Blob([JSON.stringify(scoresForExport)], { type: "application/json" });
+            const blob = new Blob([scoresForExport.join("\n")], { type: "application/json" });
             document.querySelector("#results").setAttribute("href", URL.createObjectURL(blob));
             document.querySelector("#results").innerText = `💾 Export results (${Object.values(scores).filter(x => x != 'skip').length})`;
 

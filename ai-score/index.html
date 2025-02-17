@@ -54,11 +54,13 @@
             items = Object.entries(items)
             render();
         }
-
         function render() {
             const scores = getScores();
 
-            const blob = new Blob([JSON.stringify(scores)], { type: "application/json" });
+            const scoresForExport = Object.entries(scores)
+                .map(([k, v]) => ({ "type": "score", "source": "tgr-human", "model": k.split(",")[0], "prompt_id": +k.split(",")[1], "score": v }));
+
+            const blob = new Blob([JSON.stringify(scoresForExport)], { type: "application/json" });
             document.querySelector("#results").setAttribute("href", URL.createObjectURL(blob));
             document.querySelector("#results").innerText = `💾 Export results (${Object.values(scores).filter(x => x != 'skip').length})`;
 

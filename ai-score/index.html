@@ -4,26 +4,31 @@
 <head>
     <meta charset="utf-8" />
     <style>
-        body {
+        body,
+        button {
             font-size: 20px;
         }
 
-        button {
-            font-size: 30px;
-            margin: 20px;
+        body {
+            max-width: 1000px;
         }
     </style>
 </head>
 
 <body>
+    Please score answer of model using this buttons and then send me results<br />
     <button onclick="score('ok')">🟢 OK (O)</button>
     <button onclick="score('trash')">🔴 Trash (T)</button>
-    <button onclick="exportResults()">Export results (E)</button>
+    <button onclick="score('skip')">⏭ Skip (S)</button>
+    <button onclick="clearAll()">🗑️ Clear state (delete all)</button>
+    <a id="results" download="data.json">💾 Export results</a>
     <div id="item"></div>
 
     <script src="./marked-11.1.0.min.js"></script>
     <script src="./purify-3.0.9.min.js"></script>
     <script>
+        let items, opt;
+
         function getScores() {
             return JSON.parse(localStorage.aiScores || "{}");
         }
@@ -32,38 +37,48 @@
             localStorage.aiScores = JSON.stringify(scores);
         }
 
-        let items, opt;
-
         async function init() {
             items = await fetch("./items.json").then(res => res.json());
             render();
         }
 
-        init();
-
         function render() {
+            const blob = new Blob([JSON.stringify(getScores())], { type: "application/json" });
+            document.querySelector("#results").setAttribute("href", URL.createObjectURL(blob));
+
             const scores = getScores();
             const opts = Object.entries(items).filter(opt => !scores[opt[0]]);
 
             if (opts.length == 0) {
-                document.querySelector("#item").innerHTML = "Everything scored";
-            } else {
-                opt = opts[Math.floor(Math.random() * opts.length)];
-                document.querySelector("#item").innerHTML = DOMPurify.sanitize(marked.parse(opt[1]));
+                document.querySelector("#item").innerHTML = "Well done! You can download results now";
+                return;
             }
+
+            opt = opts[Math.floor(Math.random() * opts.length)];
+            document.querySelector("#item").innerHTML = DOMPurify.sanitize(marked.parse(opt[1]));
         }
 
         function score(result) {
             const scores = getScores();
             scores[opt[0]] = result;
             setScores(scores);
+            render();
         }
 
-        function exportResults() {
-            document.body.innerText = JSON.stringify(getScores());
+        function clearAll() {
+            setScores({});
+            render();
         }
 
-        addEventListener("keypress", console.log);
+        addEventListener("keypress", ({ key }) => {
+            switch (key.toUpperCase()) {
+                case "O": score('ok'); break;
+                case "T": score('trash'); break;
+                case "S": score('skip'); break;
+            }
+        });
+
+        init();
     </script>
 </body>
 

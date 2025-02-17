@@ -40,7 +40,7 @@ else:
     inference = Client(host="http://127.0.0.1:11434").chat
 
 done = defaultdict(set)
-tasks = []
+prompts = []
 
 for file in os.listdir("."):
     if not file.endswith(".json.log"):
@@ -51,22 +51,20 @@ for file in os.listdir("."):
             data = json.loads(line)
 
             if "result" in data and data.get("runner", None) == runner:
-                done[data["model"]].add(data["task_id"])
+                done[data["model"]].add(data["prompt_id"])
             
-            if "prompt" in data and "task_id" in data:
-                tasks.append((data["task_id"], data["prompt"]))
+            if "prompt" in data and "prompt_id" in data:
+                prompts.append((data["prompt_id"], data["prompt"]))
 
 log = open(f"{int(time())}.json.log", "a")
 
-
-# Inference
 for i, model in enumerate(models):
     print(f"Model {model} ({i + 1}/{len(models)})")
 
-    unsolved_tasks = [task for task in tasks if task[0] not in done[model] and (allowlist == None or task[0] in allowlist)]
+    tasks = [prompt for prompt in prompts if prompt[0] not in done[model] and (allowlist == None or prompt[0] in allowlist)]
 
-    for task_id, prompt in tqdm(unsolved_tasks):
-        entry = {"model": model, "task_id": task_id, "runner": runner}
+    for prompt_id, prompt in tqdm(tasks):
+        entry = {"model": model, "prompt_id": prompt_id, "runner": runner}
 
         try:
             started = time()
@@ -81,3 +79,5 @@ for i, model in enumerate(models):
 
         log.write(json.dumps(entry, ensure_ascii=False) + "\n")
         log.flush()
+
+log.close()

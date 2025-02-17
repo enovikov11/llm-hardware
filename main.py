@@ -51,7 +51,7 @@ with open("in-prompts.json", "r") as file:
 done = defaultdict(set)
 
 for file in os.listdir("."):
-    if not file.startswith("out-results"):
+    if not file.endswith(".json.log"):
         continue
 
     with open(file, "r") as file:
@@ -61,7 +61,7 @@ for file in os.listdir("."):
             if "result" in data and data.get("runner", None) == runner:
                 done[data["model"]].add(data["task_id"])
 
-log = open(f"out-results-{int(time())}.json.log", "a")
+log = open(f"{int(time())}.json.log", "a")
 
 
 # Inference

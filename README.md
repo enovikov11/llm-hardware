@@ -1,3 +1,21 @@
+# Some interesting data
+
+Median time of answer, only models with 95%+ good answers
+
+|                          | Phi-4 14B   | DeepSeek-R1 32B   | Qwen2.5 32B   | DeepSeek-R1 70B   | Llama 3.3 70B   | ChatGPT 4o   | o1-mini   |
+|:-------------------------|:------------|:------------------|:--------------|:------------------|:----------------|:-------------|:----------|
+| OpenAI API               |             |                   |               |                   |                 | 356          | 430       |
+| RTX 4090 24GB, 3400€     | 418         | 185               | 200           |                   |                 |              |           |
+| RTX 5090 32GB, 5600€     | 607         | 284               | 314           | 23*               |                 |              |           |
+| Dual RTX 4090 24GB 6000€ | 411         | 170               | 194           | 91                | 95              |              |           |
+| Mac M3 Max 128GB, 6250€  | 136         | 64                | 65            | 28                | 29              |              |           |
+| RTX A6000 48GB 7550€     | 280         | 129               | 135           | 66                | 70              |              |           |
+| Dual RTX 5090 32GB 8100€ | 579         | 234               | 253           | 129               | 136             |              |           |
+| RTX 6000Ada 48GB 10 000€ | 343         | 151               | 166           | 78                | 79              |              |           |
+| A100 SXM4 40GB 23 000€   | 405         | 185               | 201           |                   |                 |              |           |
+
+*cpu inference
+
 # How to run tests
 
 ```
@@ -175,3 +193,25 @@ afplay /Users/enovikov11/Downloads/mon.mp3
 /Users/enovikov11/Library/Python/3.11/bin/vastai destroy instance 123
 
 python3.11 main.py --runner m1 --models deepseek-r1:1.5b
+
+TODO/IDEAS:
+- Evaluate also multimessage prompts (maybe chatgpt assisted dialogues)
+- Evaluate using another AI (chatgpt)
+- Rename ai-score to Arena
+- Make ai-score read main.json.log
+- Rewrite readme, put tables in it
+- Write more tg posts about topic
+- Measure rtx 4090 + cpu
+
+
+rtx 4090 -> бюджетно, можно гонять нормальные небольшие модели, расширяется до x2 4090
+rtx 5090 -> лучшая моща
+a6000 -> лучший вариант для обучения
+
+обучать лучше в облаке за деньги
+
+RTX4090 rig, примерно:
+2150 eur = видюха
+600 eur = AMD Ryzen 9 7950X
+800 eur = motherboard
+120 eur = ram

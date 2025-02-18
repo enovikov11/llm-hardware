@@ -1,3 +1,31 @@
+# How to run tests
+
+```
+# Install requirements
+python3 -m pip install -r requirements.txt
+
+# Start ollama app (mac) or service (linux)
+
+# Pull models (you are not required to pull all, but highly recommended)
+ollama pull llama2-uncensored:7b  # 3.8 GB
+ollama pull deepseek-r1:7b        # 4.7 GB
+ollama pull qwen2.5:14b           # 9.0 GB
+ollama pull phi4:14b              # 9.1 GB
+ollama pull deepseek-r1:32b       # 19 GB
+ollama pull qwen2.5:32b           # 19 GB
+ollama pull command-r:latest      # 18 GB
+ollama pull dolphin-mixtral:8x7b  # 26 GB
+ollama pull deepseek-r1:70b       # 42 GB
+ollama pull llama3.3:70b          # 42 GB
+
+# Run tests
+python3 main.py --runner [YOUR_RUNNER_CODENAME]
+
+# Commit and push your results, use rebase if needed
+```
+
+# Some useful info
+
 ```
 Python 3.13.2
 ollama version is 0.5.7
@@ -139,17 +167,6 @@ AMD Ryzen 9 9950X 16-core
 RTX 5090 32GB
 GENOA2D24G-2L
 AMD EPYC 9654 96-core
-
-ollama pull llama2-uncensored:7b  # 3.8 GB
-ollama pull deepseek-r1:7b        # 4.7 GB
-ollama pull qwen2.5:14b           # 9.0 GB
-ollama pull phi4:14b              # 9.1 GB
-ollama pull deepseek-r1:32b       # 19 GB
-ollama pull qwen2.5:32b           # 19 GB
-ollama pull command-r:latest      # 18 GB
-ollama pull dolphin-mixtral:8x7b  # 26 GB
-ollama pull deepseek-r1:70b       # 42 GB
-ollama pull llama3.3:70b          # 42 GB
 
 cd /Users/enovikov11/Desktop/monorepo/github/mac-ai-bench
 python3.11 main.py --runner  --ignoressl --url  --user vastai --pwd

@@ -5,7 +5,7 @@
 |                          | Phi-4 14B   | DeepSeek-R1 32B   | Qwen2.5 32B   | DeepSeek-R1 70B   | Llama 3.3 70B   | ChatGPT 4o   | o1-mini   |
 |:-------------------------|:------------|:------------------|:--------------|:------------------|:----------------|:-------------|:----------|
 | OpenAI API               |             |                   |               |                   |                 | 356          | 430       |
-| RTX 4090 24GB, 3400€     | 418         | 185               | 200           |                   |                 |              |           |
+| RTX 4090 24GB, 3650€     | 418         | 185               | 200           |                   |                 |              |           |
 | RTX 5090 32GB, 5600€     | 607         | 284               | 314           | 23*               |                 |              |           |
 | Dual RTX 4090 24GB 6000€ | 411         | 170               | 194           | 91                | 95              |              |           |
 | Mac M3 Max 128GB, 6250€  | 136         | 64                | 65            | 28                | 29              |              |           |
@@ -15,6 +15,36 @@
 | A100 SXM4 40GB 23 000€   | 405         | 185               | 201           |                   |                 |              |           |
 
 *cpu inference
+
+## Hardware leaders
+
+rtx 4090 -> budget option, for 32b models, may be scaled to x2 for 70b models
+rtx 5090 -> best raw power
+a6000 -> best for fine-tuning because of error correction (but its fine to just rent)
+
+## Model leaders
+
+## Hardware price breakdown
+
+### RTX 4090
+
+2150€ RTX 4090 24GB https://www.monitor.rs/graficke-karte/MSI-GeForce-RTX-4090-SUPRIM-X-24G
+600€ AMD Ryzen 9 7950X
+400-800€ Motherboard
+120€ RAM
+120€ m2 ssd
+100€ PSU
+80€ case
+
+3650€ total
+
+### RTX 5090
+
+3800€ https://www.monitor.rs/graficke-karte/MSI-GForce-RTX-5090-32GB-GAMING-TRIO-OC
+
+### A6000
+
+6000€ https://iponcomp.com/shop/product/pny-vcnrtxa6000-pb-quadro-rtx-a6000-48-gb-gddr6-pcie/1906968
 
 # Contributing to a project
 
@@ -43,6 +73,10 @@ python3 main.py --runner [YOUR_RUNNER_CODENAME]
 
 # Commit and push your results, use rebase if needed
 ```
+
+## Score results
+
+Go to https://tgr.rs/ai-score/ and send me a pull request with exported data
 
 ## Run tests on rented hardware
 
@@ -196,19 +230,7 @@ AMD EPYC 9654 96-core
 - Evaluate also multimessage prompts (maybe chatgpt assisted dialogues)
 - Evaluate using another AI (chatgpt)
 - Rename ai-score to Arena
-- Make ai-score read main.json.log
+- Make ai-score data builder based on main.json.log
 - Rewrite readme, put tables in it
 - Write more tg posts about topic
 - Measure rtx 4090 + cpu
-
-rtx 4090 -> бюджетно, можно гонять нормальные небольшие модели, расширяется до x2 4090
-rtx 5090 -> лучшая моща
-a6000 -> лучший вариант для обучения
-
-обучать лучше в облаке за деньги
-
-RTX4090 rig, примерно:
-2150 eur = видюха
-600 eur = AMD Ryzen 9 7950X
-800 eur = motherboard
-120 eur = ram

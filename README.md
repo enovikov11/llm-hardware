@@ -1,6 +1,6 @@
-# Some interesting data
+# Best hardware for LLM inference
 
-Median time of answer, only models with 95%+ good answers
+## Median chars per second, only models with 95%+ good answers
 
 |                          | Phi-4 14B   | DeepSeek-R1 32B   | Qwen2.5 32B   | DeepSeek-R1 70B   | Llama 3.3 70B   | ChatGPT 4o   | o1-mini   |
 |:-------------------------|:------------|:------------------|:--------------|:------------------|:----------------|:-------------|:----------|
@@ -16,7 +16,9 @@ Median time of answer, only models with 95%+ good answers
 
 *cpu inference
 
-# How to run tests
+# Contributing to a project
+
+## Run tests on your hardware and submit them as a pull request
 
 ```
 # Install requirements
@@ -42,28 +44,35 @@ python3 main.py --runner [YOUR_RUNNER_CODENAME]
 # Commit and push your results, use rebase if needed
 ```
 
+## Run tests on rented hardware
+
+https://www.runpod.io/
+https://vast.ai/
+
+### Running vast ai instance (example)
+
+```
+cd ~/Desktop/monorepo/github/mac-ai-bench
+
+python3.11 main.py --runner [runner] --ignoressl --url [api_url] --user vastai --pwd [password]
+
+afplay ~/Downloads/mon.mp3
+
+# ~/Library/Python/3.11/bin/vastai destroy instance 123
+```
+
 # Some useful info
 
 ```
-Python 3.13.2
-ollama version is 0.5.7
 
-Model Name: MacBook Pro
-  Model Identifier: Mac15,8
-  Model Number: Z1AW001KQAB/A
-  Chip: Apple M3 Max
-  Total Number of Cores: 16 (12 performance and 4 efficiency)
-  Memory: 128 GB
-  System Firmware Version: 11881.81.2
-  OS Loader Version: 11881.81.2
+Z1AW001KQAB/A
+Apple M3 Max 128 GB
+12 performance and 4 efficiency cores
+40 gpu cores metal 3
 
-Apple M3 Max:
-  Chipset Model: Apple M3 Max
-  Type: GPU
-  Bus: Built-In
-  Total Number of Cores: 40
-  Vendor: Apple (0x106b)
-  Metal Support: Metal 3
+https://browser.geekbench.com/v6/cpu/10235074  
+https://browser.geekbench.com/v6/compute/3585512  
+https://browser.geekbench.com/v6/compute/3585495  
 
 NAME                             ID              SIZE      MODIFIED   
 deepseek-r1:70b                  0c1615a8ca32    42 GB     4 days ago    
@@ -146,11 +155,6 @@ qwen2.5-coder:latest             2b0496514337    4.7 GB    4 days ago
 llava:latest                     8dd30f6b0cb1    4.7 GB    4 days ago    
 mixtral:latest                   a3b6bef0f836    26 GB     4 days ago    
 phi4:latest                      ac896e5b8b34    9.1 GB    4 days ago    
-```
-
-https://browser.geekbench.com/v6/cpu/10235074  
-https://browser.geekbench.com/v6/compute/3585512  
-https://browser.geekbench.com/v6/compute/3585495  
 
 RTX 4090 24GB
 KMPG-D32 Series
@@ -186,15 +190,9 @@ RTX 5090 32GB
 GENOA2D24G-2L
 AMD EPYC 9654 96-core
 
-cd /Users/enovikov11/Desktop/monorepo/github/mac-ai-bench
-python3.11 main.py --runner  --ignoressl --url  --user vastai --pwd
-afplay /Users/enovikov11/Downloads/mon.mp3
+```
 
-/Users/enovikov11/Library/Python/3.11/bin/vastai destroy instance 123
-
-python3.11 main.py --runner m1 --models deepseek-r1:1.5b
-
-TODO/IDEAS:
+# TODO/IDEAS:
 - Evaluate also multimessage prompts (maybe chatgpt assisted dialogues)
 - Evaluate using another AI (chatgpt)
 - Rename ai-score to Arena
@@ -202,7 +200,6 @@ TODO/IDEAS:
 - Rewrite readme, put tables in it
 - Write more tg posts about topic
 - Measure rtx 4090 + cpu
-
 
 rtx 4090 -> бюджетно, можно гонять нормальные небольшие модели, расширяется до x2 4090
 rtx 5090 -> лучшая моща

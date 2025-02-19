@@ -1,5 +1,7 @@
 # Best hardware for LLM inference
 
+Warning: This is some raw data and analytics, nor an ultimate nor complete guide. Use your own judjement and consume this with some grain of salt (this is good strategy not only in choosing llm inference hardware :) )
+
 ## Median chars per second, only models with 95%+ good answers
 
 |                          | Phi-4 14B   | DeepSeek-R1 32B   | Qwen2.5 32B   | DeepSeek-R1 70B   | Llama 3.3 70B   | ChatGPT 4o   | o1-mini   |
@@ -22,21 +24,22 @@ rtx 4090 -> budget option, for 32b models, may be scaled to x2 for 70b models
 rtx 5090 -> best raw power
 a6000 -> best for fine-tuning because of error correction (but its fine to just rent)
 
+x16/x16 pci - server grade only (motherboard+cpu >= 1500 eur)
+
 ## Model leaders
 
 ## Hardware price breakdown
 
-### RTX 4090
+### 2 x RTX 4090
 
-2150€ RTX 4090 24GB https://www.monitor.rs/graficke-karte/MSI-GeForce-RTX-4090-SUPRIM-X-24G
-600€ AMD Ryzen 9 7950X
-400-800€ Motherboard
-120€ RAM
-120€ m2 ssd
-100€ PSU
-80€ case
+2x 2150€ RTX 4090 24GB https://www.monitor.rs/graficke-karte/MSI-GeForce-RTX-4090-SUPRIM-X-24G
+590€ AMD Ryzen 9 7950X https://iponcomp.com/shop/product/amd-ryzen-9-7950x-450ghz-am5-box-100-100000514wof/2066371
+520€ ASUS ROG STRIX X670E-F GAMING WIFI https://iponcomp.com/shop/product/asus-rog-strix-x670e-f-gaming-wifi/2100303
+250€ 2x https://iponcomp.com/shop/product/kingston-fury-32gb-beast-expo-ddr5-6000mhz-cl30-kit-kf560c30bbek2-32/2260467
+180€ SSD SAMSUNG 2TB 990 PRO M.2 https://iponcomp.com/shop/product/samsung-2tb-990-pro-m2-pcie-m2-2280-mz-v9p2t0bw/2066316
+=3700€ - 5850€
 
-3650€ total
++PSU +Case +Cooling
 
 ### RTX 5090
 
@@ -45,6 +48,12 @@ a6000 -> best for fine-tuning because of error correction (but its fine to just 
 ### A6000
 
 6000€ https://iponcomp.com/shop/product/pny-vcnrtxa6000-pb-quadro-rtx-a6000-48-gb-gddr6-pcie/1906968
+
+### Cooling
+
+- fan (little to no maintenance)
+- liquid (better for high power)
+- immersive (oils corrupt and oxidizes, novec is expensive and experimental)
 
 # Contributing to a project
 
@@ -234,3 +243,7 @@ AMD EPYC 9654 96-core
 - Rewrite readme, put tables in it
 - Write more tg posts about topic
 - Measure rtx 4090 + cpu
+- Test AMD GPUs
+- Try different inference software, not ollama
+
+https://cloud.vast.ai/api/v0/bundles/?q={"rentable":{"eq":true},"num_gpus":{"gte":2,"lte":2},"gpu_name":{"in":["RTX 4090"]},"limit":1000}

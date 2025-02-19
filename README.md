@@ -247,3 +247,4 @@ AMD EPYC 9654 96-core
 - Try different inference software, not ollama
 
 https://cloud.vast.ai/api/v0/bundles/?q={"rentable":{"eq":true},"num_gpus":{"gte":2,"lte":2},"gpu_name":{"in":["RTX 4090"]},"limit":1000}
+

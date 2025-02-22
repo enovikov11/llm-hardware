@@ -101,10 +101,6 @@ afplay ~/Downloads/mon.mp3
 ```
 
 # TODO
-- Test RTX3090
-- Test Dual RTX3090
-- Test RTX4090 + CPU
-
 - Test RTX3090 with nvlink
 
 - Test dual non-ollama inference
@@ -275,3 +271,5 @@ nvidia-smi nvlink -s
 4x rtx 3090 24gb
 
 https://iponcomp.com/shop/product/amd-epyc-7302p-280ghz-sp3-oem-100-000000049/1811779
+
+https://digitalspaceport.com/how-to-run-deepseek-r1-671b-fully-locally-on-2000-epyc-rig/

@@ -66,14 +66,10 @@ python3 -m pip install -r requirements.txt
 # Start ollama app (mac) or service (linux)
 
 # Pull models (you are not required to pull all, but highly recommended)
-ollama pull llama2-uncensored:7b  # 3.8 GB
-ollama pull deepseek-r1:7b        # 4.7 GB
-ollama pull qwen2.5:14b           # 9.0 GB
 ollama pull phi4:14b              # 9.1 GB
 ollama pull deepseek-r1:32b       # 19 GB
 ollama pull qwen2.5:32b           # 19 GB
-ollama pull command-r:latest      # 18 GB
-ollama pull dolphin-mixtral:8x7b  # 26 GB
+
 ollama pull deepseek-r1:70b       # 42 GB
 ollama pull llama3.3:70b          # 42 GB
 
@@ -103,6 +99,25 @@ afplay ~/Downloads/mon.mp3
 
 # ~/Library/Python/3.11/bin/vastai destroy instance 123
 ```
+
+# TODO
+- Test RTX3090
+- Test Dual RTX3090
+- Test RTX4090 + CPU
+
+- Test RTX3090 with nvlink
+
+- Test dual non-ollama inference
+- Evaluate also multimessage prompts (maybe chatgpt assisted dialogues)
+- Evaluate using another AI (chatgpt)
+
+# Ideas
+
+- Make on-demand ollama and test its usage myself
+- [no available] Test AMD XT 7900 XTX 24GB
+- Write more tg posts about topic
+- Rename ai-score to Arena
+- Make ai-score data builder based on main.json.log
 
 # Some useful info
 
@@ -233,18 +248,30 @@ RTX 5090 32GB
 GENOA2D24G-2L
 AMD EPYC 9654 96-core
 
-```
+1x RTX 3090 24GB
+B550 AORUS ELITE v2
+AMD Ryzen 7 5800X 8-core
 
-# TODO/IDEAS:
-- Evaluate also multimessage prompts (maybe chatgpt assisted dialogues)
-- Evaluate using another AI (chatgpt)
-- Rename ai-score to Arena
-- Make ai-score data builder based on main.json.log
-- Rewrite readme, put tables in it
-- Write more tg posts about topic
-- Measure rtx 4090 + cpu
-- Test AMD GPUs
-- Try different inference software, not ollama
+2x RTX 3090 24GB
+X10DRX
+Xeon® E5-2699 v4
+
+1x RTX 4090 24GB (cpu)
+PRIME B550-PLUS
+AMD Ryzen 5 2600X 6-core
+
+```
 
 https://cloud.vast.ai/api/v0/bundles/?q={"rentable":{"eq":true},"num_gpus":{"gte":2,"lte":2},"gpu_name":{"in":["RTX 4090"]},"limit":1000}
 
+rtx 3090 24GB https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-A30900J-10P/dp/B08ZL6XD9H/ref=sr_1_1
+rtx 3090 24GB renewed nvlink https://www.amazon.com/MSI-3090-Architecture-3X-24G/dp/B094PSPVPC/ref=sr_1_3
+
+1100 eur AMD XT 7900 XTX 24GB
+2850 eur Radeon Pro W7800 32GB
+
+nvidia-smi nvlink -s
+
+4x rtx 3090 24gb
+
+https://iponcomp.com/shop/product/amd-epyc-7302p-280ghz-sp3-oem-100-000000049/1811779

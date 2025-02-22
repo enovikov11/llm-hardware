@@ -12,7 +12,7 @@ import os
 
 parser = argparse.ArgumentParser(description="AI benchmark")
 parser.add_argument("--runner", required=True, type=str, help="Your rig codename")
-parser.add_argument("--models", type=str, help="Comma-separated list of models", default="llama2-uncensored:7b,deepseek-r1:7b,qwen2.5:14b,phi4:14b,deepseek-r1:32b,qwen2.5:32b,command-r:latest,dolphin-mixtral:8x7b,deepseek-r1:70b,llama3.3:70b")
+parser.add_argument("--models", type=str, help="Comma-separated list of models", default="phi4:14b,deepseek-r1:32b,qwen2.5:32b,deepseek-r1:70b,llama3.3:70b")
 parser.add_argument("--prompts", type=str, help="main, all or comma-separated list of prompts ids", default="main")
 parser.add_argument("--openai", action="store_true", help="Use OpenAI API for inference")
 parser.add_argument("--url", type=str, help="Ollama URL")

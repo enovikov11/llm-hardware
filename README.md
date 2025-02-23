@@ -2,6 +2,20 @@
 
 Warning: This is some raw data and analytics, nor an ultimate nor complete guide. Use your own judjement and consume this with some grain of salt (this is good strategy not only in choosing llm inference hardware :) )
 
+## Strategies
+
+- GPU-first RAM: runs medium 32b-70b models at chatgpt-like speed with kinda ok intelligence
+- CPU-first RAM: runs biggest 761b models with chatgpt-like intelligence but x10 slower
+- Unified RAM (Apple M-series): power efficient option for medium models x5 slower
+
+### GPUs
+
+- RTX 4090: budget option, for 32b models, may be scaled to x2 for 70b models
+- RTX 5090: best raw power
+- RTX a6000: best for fine-tuning because of error correction (but its fine to just rent)
+
+Note: x16/x16 pci is available only on server grade motherboard+cpu (1500+ €)
+
 ## Median chars per second, only models with 95%+ good answers
 
 |                          | Phi-4 14B   | DeepSeek-R1 32B   | Qwen2.5 32B   | DeepSeek-R1 70B   | Llama 3.3 70B   | ChatGPT 4o   | o1-mini   |
@@ -17,43 +31,6 @@ Warning: This is some raw data and analytics, nor an ultimate nor complete guide
 | A100 SXM4 40GB 23 000€   | 405         | 185               | 201           |                   |                 |              |           |
 
 *cpu inference
-
-## Hardware leaders
-
-rtx 4090 -> budget option, for 32b models, may be scaled to x2 for 70b models
-rtx 5090 -> best raw power
-a6000 -> best for fine-tuning because of error correction (but its fine to just rent)
-
-x16/x16 pci - server grade only (motherboard+cpu >= 1500 eur)
-
-## Model leaders
-
-## Hardware price breakdown
-
-### 2 x RTX 4090
-
-2x 2150€ RTX 4090 24GB https://www.monitor.rs/graficke-karte/MSI-GeForce-RTX-4090-SUPRIM-X-24G
-590€ AMD Ryzen 9 7950X https://iponcomp.com/shop/product/amd-ryzen-9-7950x-450ghz-am5-box-100-100000514wof/2066371
-520€ ASUS ROG STRIX X670E-F GAMING WIFI https://iponcomp.com/shop/product/asus-rog-strix-x670e-f-gaming-wifi/2100303
-250€ 2x https://iponcomp.com/shop/product/kingston-fury-32gb-beast-expo-ddr5-6000mhz-cl30-kit-kf560c30bbek2-32/2260467
-180€ SSD SAMSUNG 2TB 990 PRO M.2 https://iponcomp.com/shop/product/samsung-2tb-990-pro-m2-pcie-m2-2280-mz-v9p2t0bw/2066316
-=3700€ - 5850€
-
-+PSU +Case +Cooling
-
-### RTX 5090
-
-3800€ https://www.monitor.rs/graficke-karte/MSI-GForce-RTX-5090-32GB-GAMING-TRIO-OC
-
-### A6000
-
-6000€ https://iponcomp.com/shop/product/pny-vcnrtxa6000-pb-quadro-rtx-a6000-48-gb-gddr6-pcie/1906968
-
-### Cooling
-
-- fan (little to no maintenance)
-- liquid (better for high power)
-- immersive (oils corrupt and oxidizes, novec is expensive and experimental)
 
 # Contributing to a project
 
@@ -102,6 +79,7 @@ afplay ~/Downloads/mon.mp3
 
 # TODO
 - Test RTX3090 with nvlink
+- Test EPYC 7702 CPU only
 
 - Test dual non-ollama inference
 - Evaluate also multimessage prompts (maybe chatgpt assisted dialogues)
@@ -115,18 +93,120 @@ afplay ~/Downloads/mon.mp3
 - Rename ai-score to Arena
 - Make ai-score data builder based on main.json.log
 
-# Some useful info
+# Hardware component prices
 
-```
+## GPU
 
+600€ RTX 3090 24GB (used) https://www.kupujemprodajem.com/pretraga?keywords=rtx%203090&locationId=1&priceFrom=500&priceTo=1000&currency=eur
+2600€ RTX 4090 24GB
+6000€ RTX A6000 https://iponcomp.com/shop/product/pny-vcnrtxa6000-pb-quadro-rtx-a6000-48-gb-gddr6-pcie/1906968
+
+590€ AMD Ryzen 9 7950X https://iponcomp.com/shop/product/amd-ryzen-9-7950x-450ghz-am5-box-100-100000514wof/2066371
+520€ ASUS ROG STRIX X670E-F GAMING WIFI https://iponcomp.com/shop/product/asus-rog-strix-x670e-f-gaming-wifi/2100303
+250€ 32GB RAM https://iponcomp.com/shop/product/kingston-fury-32gb-beast-expo-ddr5-6000mhz-cl30-kit-kf560c30bbek2-32/2260467
+180€ SSD SAMSUNG 2TB 990 PRO M.2 https://iponcomp.com/shop/product/samsung-2tb-990-pro-m2-pcie-m2-2280-mz-v9p2t0bw/2066316
+
+rtx 3090 24GB https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-A30900J-10P/dp/B08ZL6XD9H/ref=sr_1_1
+rtx 3090 24GB renewed nvlink https://www.amazon.com/MSI-3090-Architecture-3X-24G/dp/B094PSPVPC/ref=sr_1_3
+
+1100 eur AMD XT 7900 XTX 24GB
+2850 eur Radeon Pro W7800 32GB
+
+## CPU
+
+750 eur epyc 7702 used
+
+https://iponcomp.com/shop/product/supermicro-x12spl-f-motherboard/2138052
+8 x https://iponcomp.com/shop/product/crucial-64gb-ddr4-3200mhz-ecc-mta36asf8g72pz-3g2r/2070919
+https://iponcomp.com/shop/product/intel-xeon-silver-4309y-280ghz-lga-4189-oem/2225485
+
+
+https://iponcomp.com/shop/product/intel-xeon-silver-4310-210ghz-lga-4189-oem/2234947
+
+https://iponcomp.com/shop/product/amd-epyc-7302p-280ghz-sp3-oem-100-000000049/1811779
+
+PSU
+Case
+Cooling
+
+# Unsorted
+
+https://digitalspaceport.com/how-to-run-deepseek-r1-671b-fully-locally-on-2000-epyc-rig/
+
+https://cloud.vast.ai/api/v0/bundles/?q={"rentable":{"eq":true},"num_gpus":{"gte":2,"lte":2},"gpu_name":{"in":["RTX 4090"]},"limit":1000}
+
+nvidia-smi nvlink -s
+
+4x rtx 3090 24gb
+
+https://cloud.vast.ai/api/v0/bundles/?q={"show_incompatible":{"eq":true},"cpu_ram":{"gte":440871.89976053947,"lte":8388608},"gpu_name":{"in":["RTX 3090","H200","Titan V","Titan X","Titan Xp","Titan RTX","RTX 5090","RTX 5080","RTX 4090","RTX 4090D","RTX 4080S","RTX 4080","RTX 4070S Ti","RTX 4070S","RTX 4070 Ti","RTX 4070","RTX 4060 Ti","RTX 4060","RTX 3090 Ti","RTX 3080 Ti","RTX 3080","RTX 3070 Ti","RTX 3070","RTX 3070 laptop","RTX 3060 Ti","RTX 3060","RTX 3060 laptop","RTX 3050","RTX 2080 Ti","RTX 2080S","RTX 2080","RTX 2070S","RTX 2070","RTX 2060S","RTX 2060","RTX 6000Ada","RTX 5000Ada","RTX 4500Ada","RTX 4000Ada","RTX A6000","RTX A5000","RTX A4500","RTX A4000","RTX A2000","A100 PCIE","A800 PCIE","A100 SXM4","A100X","A100 SXM","GH200 SXM","H100 PCIE","H100 SXM","H100 NVL","A40","A30","A16","A10g","A10","L40S","L40","L4","Tesla K80","Tesla P100","Tesla P40","Tesla P4","Tesla V100","GTX 1660 Ti","GTX 1660 S","GTX 1660","GTX 1650 S","GTX 1650","GTX 1080 Ti","GTX 1080","GTX 1070 Ti","GTX 1070","GTX 1060 6GB","GTX 1050 Ti","GTX 1050","GTX 980 Ti","GTX 980","GTX 970","GTX 960","GTX 750 Ti","GTX 750","Q RTX 8000","Q RTX 6000","Q RTX 5000","Q RTX 4000","P104-100","P106-100","GP100","Quadro P6000","Quadro P5000","Quadro P4000","Quadro P2000"]},"num_gpus":{"gte":0,"lte":18}}
+
+## Cooling
+
+- fan (little to no maintenance)
+- liquid (better for high power)
+- immersive (oils corrupt and oxidizes, novec is expensive and experimental)
+
+# Specs
+
+## vast ai
+
+RTX 4090 24GB
+KMPG-D32 Series
+AMD EPYC 7343 16-core
+
+RTX 5090 32GB
+X870 GAMING
+AMD Ryzen 9 7950X 16-core
+
+RTX A6000 48GB
+Xeon® Gold 6248R
+
+RTX 6000Ada 48GB
+H12DSG-O-
+AMD EPYC 7443 24-core
+
+2x RTX 4090 24GB
+ROME2D32GM-2T
+AMD EPYC 7B13 64-core
+
+2x RTX 5090 32GB
+H13SSL-NT
+AMD EPYC 9124 16-core
+
+A100 SXM4 40GB
+AMD EPYC 7543 32-core
+
+RTX 5090 32GB
+ROG STRIX X870-A GAMING WIFI
+AMD Ryzen 9 9950X 16-core
+
+RTX 5090 32GB
+GENOA2D24G-2L
+AMD EPYC 9654 96-core
+
+1x RTX 3090 24GB
+B550 AORUS ELITE v2
+AMD Ryzen 7 5800X 8-core
+
+2x RTX 3090 24GB
+X10DRX
+Xeon® E5-2699 v4
+
+1x RTX 4090 24GB (cpu)
+PRIME B550-PLUS
+AMD Ryzen 5 2600X 6-core
+
+## Apple M3 Max 128 GB
 Z1AW001KQAB/A
-Apple M3 Max 128 GB
 12 performance and 4 efficiency cores
 40 gpu cores metal 3
 
 https://browser.geekbench.com/v6/cpu/10235074  
 https://browser.geekbench.com/v6/compute/3585512  
 https://browser.geekbench.com/v6/compute/3585495  
+
+## Models downloaded on M3 Max
 
 NAME                             ID              SIZE      MODIFIED   
 deepseek-r1:70b                  0c1615a8ca32    42 GB     4 days ago    
@@ -209,67 +289,3 @@ qwen2.5-coder:latest             2b0496514337    4.7 GB    4 days ago
 llava:latest                     8dd30f6b0cb1    4.7 GB    4 days ago    
 mixtral:latest                   a3b6bef0f836    26 GB     4 days ago    
 phi4:latest                      ac896e5b8b34    9.1 GB    4 days ago    
-
-RTX 4090 24GB
-KMPG-D32 Series
-AMD EPYC 7343 16-core
-
-RTX 5090 32GB
-X870 GAMING
-AMD Ryzen 9 7950X 16-core
-
-RTX A6000 48GB
-Xeon® Gold 6248R
-
-RTX 6000Ada 48GB
-H12DSG-O-
-AMD EPYC 7443 24-core
-
-2x RTX 4090 24GB
-ROME2D32GM-2T
-AMD EPYC 7B13 64-core
-
-2x RTX 5090 32GB
-H13SSL-NT
-AMD EPYC 9124 16-core
-
-A100 SXM4 40GB
-AMD EPYC 7543 32-core
-
-RTX 5090 32GB
-ROG STRIX X870-A GAMING WIFI
-AMD Ryzen 9 9950X 16-core
-
-RTX 5090 32GB
-GENOA2D24G-2L
-AMD EPYC 9654 96-core
-
-1x RTX 3090 24GB
-B550 AORUS ELITE v2
-AMD Ryzen 7 5800X 8-core
-
-2x RTX 3090 24GB
-X10DRX
-Xeon® E5-2699 v4
-
-1x RTX 4090 24GB (cpu)
-PRIME B550-PLUS
-AMD Ryzen 5 2600X 6-core
-
-```
-
-https://cloud.vast.ai/api/v0/bundles/?q={"rentable":{"eq":true},"num_gpus":{"gte":2,"lte":2},"gpu_name":{"in":["RTX 4090"]},"limit":1000}
-
-rtx 3090 24GB https://www.amazon.com/ZOTAC-Graphics-IceStorm-Advanced-ZT-A30900J-10P/dp/B08ZL6XD9H/ref=sr_1_1
-rtx 3090 24GB renewed nvlink https://www.amazon.com/MSI-3090-Architecture-3X-24G/dp/B094PSPVPC/ref=sr_1_3
-
-1100 eur AMD XT 7900 XTX 24GB
-2850 eur Radeon Pro W7800 32GB
-
-nvidia-smi nvlink -s
-
-4x rtx 3090 24gb
-
-https://iponcomp.com/shop/product/amd-epyc-7302p-280ghz-sp3-oem-100-000000049/1811779
-
-https://digitalspaceport.com/how-to-run-deepseek-r1-671b-fully-locally-on-2000-epyc-rig/

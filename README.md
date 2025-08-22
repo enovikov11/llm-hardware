@@ -2,6 +2,10 @@
 
 Warning: This is some raw data and analytics, nor an ultimate nor complete guide. Use your own judjement and consume this with some grain of salt (this is good strategy not only in choosing llm inference hardware :) )
 
+## TODO
+
+- Add actual small and big distilled models: oss, kimi k2, qwen 3
+
 ## Strategies
 
 - GPU-first RAM: runs medium 32b-70b models at chatgpt-like speed with kinda ok intelligence
@@ -212,6 +216,17 @@ Z1AW001KQAB/A
 https://browser.geekbench.com/v6/cpu/10235074  
 https://browser.geekbench.com/v6/compute/3585512  
 https://browser.geekbench.com/v6/compute/3585495  
+
+## virt5070TI
+
+hyper specs:
+
+MB: ASUS TUF GAMING B650-PLUS WIFI
+CPU: AMD Ryzen 7 7800X3D 8-Core Processor
+RAM: 64GB Kingston KF560C36-32 x2 - 64GB
+GPU: Nvidia 5700 Ti 16GB
+
+Računar GAME CENTAR Electron - AMD Ryzen 7 7800X3D/64GB/2TB/RTX 5070 Ti 16GB - 347.298 RSD (with PDV)
 
 ## Models downloaded on M3 Max
 
